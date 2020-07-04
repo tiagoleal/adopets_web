@@ -1,44 +1,94 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Adopets Test Web</h1>
 
-## Available Scripts
+<p align="center">
+  <a href="https://github.com/tiagoleal/adopets_web">
+    <img alt="Current Version" src="https://img.shields.io/badge/version-1.0.0 -brightgreen.svg">
+  </a>
+  <a href="https://React.com/pt-br/">
+    <img alt="" src="https://img.shields.io/badge/React-16.13.1-blue.svg" target="_blank">
+  </a>
+  <a href="https://nodejs.org/en/">
+    <img alt="Node Version" src="https://img.shields.io/badge/node-%3E%3D%2012.18.2-brightgreen" target="_blank">
+  </a>
+  
+  <a href="https://www.typescriptlang.org/">
+    <img alt="" src="https://img.shields.io/badge/Typescript-3.7.2-blue.svg" target="_blank">
+  </a>
 
-In the project directory, you can run:
+</p>
 
-### `yarn start`
+## Stack the Project
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Ant Design**
+- **NodeJS**
+- **Yarn**
+- **React**
+- **React Hooks**
+- **Context Api**
+- **Typescript**
+- **SQLite3**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Features
 
-### `yarn test`
+- **Authentication:** Login, Logout.
+- **Product:** Register, Edit, Delete and list/Seach(Filters by name, description and category), incluir também opção de Paginação.
+- **Logs:** Save logs of everything the user does in the API,
+  save error logs.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `yarn build`
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+You must have installed on your machine:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Node
+- NPM
 
-### `yarn eject`
+### Installing
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+First step is to install the docker service:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# Using Ubuntu
+$ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Using Debian, as root
+# curl -sL https://deb.nodesource.com/setup_12.x | bash -
+# apt-get install -y nodejs
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
 
-## Learn More
+For test if the service was installed with succeed, you can run the command for to check de version of Node:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+$ node -v
+# Must be have the node version: v12.18.2
+$ npm -v
+# Must be have the npm version: 6.14.5
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## First steps
+
+Follow the instructions to have a project present and able to run it locally.
+After copying the repository to your machine, go to the project's root site and:
+
+1.  Install dependencies
+
+```
+$ yarn install
+```
+
+2.  Run Project
+
+```
+$ yarn start
+```
+
+## Authors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+[<img src="https://avatars1.githubusercontent.com/u/5727529?s=460&v=4" width="100px;"/><br /><sub><b>Tiago Leal</b></sub>](https://github.com/tiagoleal)<br />

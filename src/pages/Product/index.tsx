@@ -66,7 +66,6 @@ const Product = () => {
   const handleEditProduct = (product: ProductTransaction) => {
     showDrawer();
     setSelectedProduct(product);
-    // console.log("Edit record", JSON.stringify(product));
   };
 
   const showDrawer = () => {
@@ -79,7 +78,6 @@ const Product = () => {
 
   const handleDeleteProduct = async (id: number) => {
     try {
-      // console.log("Delete record", id);
       const response = await Api.delete(`products/${id}`);
       message.success(response.data.message);
       onLoadProducts();

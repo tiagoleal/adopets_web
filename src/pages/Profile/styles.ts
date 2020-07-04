@@ -10,10 +10,6 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  /* width: 100%;
-  max-width: 315px;
-  text-align: center; */
-
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -23,8 +19,6 @@ export const Content = styled.div`
   border-style: solid;
   border-radius: 6px;
   border-color: #cacaca;
-
-  /* margin-top: */
 
   .avatar {
     margin-bottom: 20px;

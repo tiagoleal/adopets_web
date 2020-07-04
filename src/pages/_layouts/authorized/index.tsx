@@ -10,8 +10,6 @@ import { Layout, Breadcrumb } from "antd";
 const { Content, Footer } = Layout;
 
 const authorized: React.FC = ({ children }) => {
-  // console.log(JSON.stringify(children));
-
   return (
     <Container>
       <Layout style={{ minHeight: "100vh" }}>
@@ -20,7 +18,7 @@ const authorized: React.FC = ({ children }) => {
           <HeaderNavbar />
           <Content style={{ padding: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>Adopets</Breadcrumb.Item>
+              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
               <Breadcrumb.Item>
                 <a href="/product">Product</a>
               </Breadcrumb.Item>
