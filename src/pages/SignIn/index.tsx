@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { Form, Input, Button, Avatar, Typography } from "antd";
+import { Form, Input, Button, Avatar, message, Typography } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
@@ -26,13 +26,16 @@ const SignIn: React.FC = () => {
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
-      // console.log("data: ", data);
-      await signIn({
-        email: data.email,
-        password: data.password,
-      });
+      try {
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
 
-      history.push("/product");
+        history.push("/product");
+      } catch (error) {
+        message.error(error.response.data.messages);
+      }
     },
     [signIn, history]
   );

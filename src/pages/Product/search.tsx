@@ -50,29 +50,24 @@ const SearchProduct: React.FC<Props> = ({
 
   useEffect(() => {
     Api.get("/categories").then((response) => {
-      console.log(response.data);
       setCategories(response.data);
     });
   }, []);
 
   const onSearch = (productSearch: any) => {
-    // console.log("Search values of form: ", productSearch);
     const params = {
       name: productSearch.name,
       description: productSearch.description,
       category_id: productSearch.category_id,
       page: 1,
     };
-    // console.log("pages: " + JSON.stringify(params));
     setPage(1);
     setSearchParams(params);
     onLoadProducts(params);
   };
 
   const onChangePage = (page: number) => {
-    // console.log("page: " + page);
     setPage(page);
-    // console.log("paginator: " + JSON.stringify(searchParams));
     searchParams.page = page;
     onLoadProducts(searchParams);
   };

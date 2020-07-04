@@ -3,15 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import Api from "../../services/api";
 
-import {
-  Form,
-  message,
-  Input,
-  Button,
-  Select,
-  InputNumber,
-  Divider,
-} from "antd";
+import { Form, message, Input, Button, Select, Divider } from "antd";
 
 import InputNumberCustom from "../../components/InputNumber";
 
@@ -25,7 +17,7 @@ interface Product {
   name: string;
   description: string;
   category_id: number;
-  price: any;
+  price: number;
   stock: number;
   stockMask: {
     number: number | 0;
@@ -40,13 +32,10 @@ type Props = {
 const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
   const [form] = Form.useForm();
   const history = useHistory();
-
   const [categories, setCategories] = useState<Category[]>([]);
-  // const [price, setPrice] = useState();
 
   useEffect(() => {
     Api.get("/categories").then((response) => {
-      // console.log(response.data);
       setCategories(response.data);
     });
   }, []);
@@ -56,17 +45,7 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
   };
 
   const handleSubmit = useCallback(async (product: Product) => {
-    // console.log("data: ", JSON.stringify(product));
-    // const number = 123456.789;
-    // console.log(new Intl.NumberFormat('pt-Br', { style: 'currency', currency: 'BRL' }).format(number));
-
     product.stock = product.stockMask.number;
-    product.price = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    })
-      .format(product.price)
-      .toString();
 
     try {
       if (selectedProduct?.id) {
@@ -84,8 +63,7 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
       onLoadProducts();
       history.push("/product");
     } catch (error) {
-      console.log(error);
-      message.error(error.message);
+      message.error("Validations Fails: check your data!");
     }
   }, []);
 
@@ -95,9 +73,7 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
       name: selectedProduct?.name,
       description: selectedProduct?.description,
       category_id: selectedProduct?.category_id,
-      price: selectedProduct?.price
-        ? selectedProduct?.price.replace("$", "")
-        : "",
+      price: selectedProduct?.price,
       stockMask: {
         number: selectedProduct?.stock,
         currency: "rmb",
@@ -107,16 +83,6 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
 
   const handleClearForm = () => {
     form.resetFields();
-  };
-
-  const onChangePrice = (price: any) => {
-    console.log("price:" + price);
-    console.log(
-      new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(price)
-    );
   };
 
   const checkStock = (rule: any, value: any) => {
@@ -130,7 +96,7 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
     <Form
       form={form}
       layout="vertical"
-      // initialValues={{ size: "large" }}
+      key="form-product"
       size="large"
       onFinish={onFinish}
       initialValues={{
@@ -192,15 +158,7 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
           },
         ]}
       >
-        <InputNumber
-          formatter={(value) =>
-            `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-          }
-          parser={(value: any) => value.replace(/\$\s?|(,*)/g, "")}
-          onChange={onChangePrice}
-          placeholder="Please input price"
-        />
-        {/* <Input placeholder="Please input price" /> */}
+        <Input placeholder="Please input price" />
       </Form.Item>
 
       <Form.Item
@@ -208,7 +166,6 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
         name="stockMask"
         rules={[{ validator: checkStock }]}
       >
-        {/* <InputNumber placeholder="Please input stock" /> */}
         <InputNumberCustom />
       </Form.Item>
 
