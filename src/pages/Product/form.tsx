@@ -204,9 +204,10 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
         ]}
       >
         <InputNumber
+          min={1}
           defaultValue={10000000}
           style={{
-            width: 400,
+            width: 200,
             marginRight: "1rem",
           }}
           formatter={currencyFormatter(currencyOptions.value)}
