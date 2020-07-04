@@ -3,7 +3,15 @@ import { useHistory } from "react-router-dom";
 
 import Api from "../../services/api";
 
-import { Form, message, Input, Button, Select, Divider } from "antd";
+import {
+  Form,
+  message,
+  Input,
+  InputNumber,
+  Button,
+  Select,
+  Divider,
+} from "antd";
 
 import InputNumberCustom from "../../components/InputNumber";
 
@@ -29,6 +37,44 @@ type Props = {
   onLoadProducts(): void;
 };
 
+const locale = "pt-BR";
+const currencyOptions = {
+  label: "Brazilian Real",
+  value: `"BRAZIL"::BRL`,
+};
+
+const currencyFormatter = (selectedCurrOpt: any) => (value: any) => {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: selectedCurrOpt.split("::")[1],
+  }).format(value);
+};
+
+const currencyParser = (val: any) => {
+  try {
+    if (typeof val === "string" && !val.length) {
+      val = "0.0";
+    }
+
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, "");
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, "");
+    var reversedVal = val.replace(new RegExp("\\" + group, "g"), "");
+    reversedVal = reversedVal.replace(new RegExp("\\" + decimal, "g"), ".");
+    reversedVal = reversedVal.replace(/[^0-9.]/g, "");
+
+    const digitsAfterDecimalCount = (reversedVal.split(".")[1] || []).length;
+    const needsDigitsAppended = digitsAfterDecimalCount > 2;
+
+    if (needsDigitsAppended) {
+      reversedVal = reversedVal * Math.pow(10, digitsAfterDecimalCount - 2);
+    }
+
+    return Number.isNaN(reversedVal) ? 0 : reversedVal;
+  } catch (error) {
+    // console.error(error);
+  }
+};
+
 const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
   const [form] = Form.useForm();
   const history = useHistory();
@@ -46,7 +92,6 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
 
   const handleSubmit = useCallback(async (product: Product) => {
     product.stock = product.stockMask.number;
-
     try {
       if (selectedProduct?.id) {
         const response = await Api.put(
@@ -158,7 +203,15 @@ const ProductForm: React.FC<Props> = ({ selectedProduct, onLoadProducts }) => {
           },
         ]}
       >
-        <Input placeholder="Please input price" />
+        <InputNumber
+          defaultValue={10000000}
+          style={{
+            width: 400,
+            marginRight: "1rem",
+          }}
+          formatter={currencyFormatter(currencyOptions.value)}
+          parser={currencyParser}
+        />
       </Form.Item>
 
       <Form.Item
