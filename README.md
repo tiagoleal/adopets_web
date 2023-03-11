@@ -1,4 +1,4 @@
-<h1 align="center">Adopets Test Web</h1>
+<h1 align="center">Adopets Web</h1>
 
 <p align="center">
   <a href="https://github.com/tiagoleal/adopets_web">
